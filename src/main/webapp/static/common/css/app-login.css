@@ -1,0 +1,251 @@
+body {font-family: "Microsoft Yahei","苹方";}
+/*
+html{font-size:100%;}
+body{font-size:14px;font-size:1rem;}
+*/
+.login-page {
+  position: absolute;top: 0;left: 0;right: 0;bottom: 0;overflow: auto;
+  text-align: left;color: #666;padding: 0;text-align: center;
+  background: url('../images/login-bg.png') no-repeat center top #fff;
+  background-size:cover;
+}
+.width1330{width: 95em;margin: 0px auto}
+.login-head{height: 8.929em;clear: both;overflow: hidden;background: #fff}
+.login-head .width1330{margin:2.286em auto}
+.login-head .logo-left{float: left;font-size: 2.85em;letter-spacing: 0.1em}
+.login-head .logo-left img{ padding-right: 14px;margin-right: 14px;border-right:2px solid #bdbdbf}
+.login-head .logo-right{float: right}
+.login-main{padding-top: 15em;}
+.logo-content-leftimg{text-align: center}
+/* .login-content{background: url('../images/login-box.png') no-repeat right bottom;padding-bottom: 60px;} */
+.login-content-form{text-align: left;width:442px;background-color: #fff;border-radius: 0.357em;
+  padding:2.143em;min-height: 450px;float: right;margin-right:105px;position: relative;box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+}
+.animated {
+  -webkit-animation-duration: .6s;
+  animation-duration: .6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes flipInX {
+  0% {
+    -webkit-transform:perspective(400px) rotateX(90deg);
+    transform:perspective(400px) rotateX(90deg);
+    opacity:0
+  }
+  40% {
+    -webkit-transform:perspective(400px) rotateX(-10deg);
+    transform:perspective(400px) rotateX(-10deg)
+  }
+  70% {
+    -webkit-transform:perspective(400px) rotateX(10deg);
+    transform:perspective(400px) rotateX(10deg)
+  }
+  100% {
+    -webkit-transform:perspective(400px) rotateX(0deg);
+    transform:perspective(400px) rotateX(0deg);
+    opacity:1
+  }
+}
+@keyframes flipInX {
+   0% {
+     -webkit-transform:perspective(400px) rotateX(90deg);
+     -ms-transform:perspective(400px) rotateX(90deg);
+     transform:perspective(400px) rotateX(90deg);
+     opacity:0
+   }
+   40% {
+     -webkit-transform:perspective(400px) rotateX(-10deg);
+     -ms-transform:perspective(400px) rotateX(-10deg);
+     transform:perspective(400px) rotateX(-10deg)
+   }
+   70% {
+     -webkit-transform:perspective(400px) rotateX(10deg);
+     -ms-transform:perspective(400px) rotateX(10deg);
+     transform:perspective(400px) rotateX(10deg)
+   }
+   100% {
+     -webkit-transform:perspective(400px) rotateX(0deg);
+     -ms-transform:perspective(400px) rotateX(0deg);
+     transform:perspective(400px) rotateX(0deg);
+     opacity:1
+   }
+ }
+.flipInX {
+    -webkit-backface-visibility:visible!important;
+    -ms-backface-visibility:visible!important;
+    backface-visibility:visible!important;
+    -webkit-animation-name:flipInX;
+    animation-name:flipInX
+  }
+/*控制div顺时针无限旋转*/
+/*
+@-webkit-keyframes rotateX {
+  0% {
+    transform:rotate(0deg);
+    -ms-transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -webkit-transform:rotate(0deg);
+    -o-transform:rotate(0deg);
+  }
+  100% {
+    transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+  }
+}
+@keyframes rotateX {
+  0% {
+    transform:rotate(0deg);
+    -ms-transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -webkit-transform:rotate(0deg);
+    -o-transform:rotate(0deg);
+  }
+  100% {
+    transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+  }
+}
+.rotateX{
+  -webkit-animation:rotateX 2s infinite linear;
+  animation:rotateX 2s infinite linear;
+}
+*/
+.img-circle {border:none;border-radius: 0;position: absolute;top:-30px;left: 40%;width: 100px;}
+.login-page h1 {font-weight: 300;text-align: center;margin: 50px 0 20px 0;}
+.login-page .form-content {padding: 0;}
+.form-group {margin-bottom: 0px;position: relative;}
+.input-underline {border: 2px solid #ececec;color: #666;padding-left: 44px;}
+.form-group .labtitle{position: absolute; left:15px;top:18px;}
+.form-group .labtitle img{margin-right: 10px}
+.progress-login2{background-color: #ff9000;padding:0.5em;text-align:center;
+  color: #fff;font-size: 1.7em;display: block;
+  border-radius: 0.208em;  border: 0;width: 100%; letter-spacing: 0.1em;
+}
+#messageBox{position: absolute; z-index: 100;left:40%;top:150px}
+.alert-success {
+  background-color: #2bcaee;
+  border-color: #38d1f4;
+  color: #fff;
+}
+label.error {
+  color: #fff;
+}
+.version{font-size:0.857em;color: #666;float: right;font-weight: 100;margin-top:1em}
+.text-muted{position: relative}
+.text-muted .yzmlabel{position: absolute; left:15px;top:18px;font-weight: 200;
+  font-size: 18px;
+  line-height: 1.3333333;
+}
+.text-muted #validateCode{height: 46px;padding: 10px 16px;font-size: 18px;line-height: 1.3333333;
+  width: 60%!important;line-height: 1.42857143;background-color: #fff;border: 2px solid #ececec;color: #666;padding-left: 44px;
+  font-weight: inherit!important;
+}
+.text-muted .validateCode{width: 26%;float: right;height: 46px;}
+.foot{color: #fff;text-align: center;line-height: 1.7em;margin-top: 1em}
+
+@media screen and (max-width:1366px) {
+  .login-head{height: 90px;clear: both;overflow: hidden;background: #fff}
+  .width1330{width: 1200px}
+  .login-head .width1330{margin:20px auto;height: 50px;width: 950px}
+  .logo-left img{height:50px}
+  .login-head .logo-left {font-size: 28px;}
+  .logo-right{height: 30px;margin-top: 10px}
+  .login-content{background: url('../images/login-box.png') no-repeat right bottom;background-size: 530px 97px}
+  .login-main {padding-top: 130px;}
+  .logo-content-leftimg img{height: 350px}
+  .img-circle {top: -30px;left: 40%;height: 76px;}
+  .login-page h1 {margin: 25px 0 20px 0;font-size: 25px}
+  .login-content-form {
+    width: 340px;
+    border-radius: 0.357em;
+    padding: 2.143em;
+    min-height: 300px;
+    margin-right: 80px;
+  }
+  .login-page .form-group {
+    padding: 6px 0;
+  }
+  .input-lg {
+    height: 32px;
+    padding: 5px 16px;
+    font-size: 14px;
+    padding-left: 44px;
+  }
+  .form-group .labtitle {
+    position: absolute;
+    left: 15px;
+    top: 12px;
+  }
+  .form-group .labtitle img {
+    margin-right: 10px;
+    height: 20px;
+  }
+  .progress-login2{padding:6px;;font-size: 14px;}
+  .text-muted #validateCode{height: 32px;padding: 5px 16px; }
+  .text-muted .validateCode {
+    width: 26%;
+    float: right;
+    height: 32px;
+  }
+  .text-muted #validateCode {width: 50%!important;}
+  .foot{color: #fff;text-align: center;line-height: 24px;margin-top:12px}
+  #messageBox{top:120px}
+  .text-muted #validateCode {
+    padding-left: 44px;
+    font-size: 14px;
+  }
+  .text-muted .yzmlabel{
+    font-size: 14px;
+    line-height: 1.3333333;
+  }
+}
+
+/* 手机等小屏幕手持设备 */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .login-main,.width1330 {
+    width: auto;
+  }
+  .login-head .logo-left {
+    font-size: 22px;
+    letter-spacing: 0;
+    position: relative;
+    padding-left: 60px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .login-head .logo-left:before{
+    position: absolute;
+    left: 5px;
+    content: "";
+    background: url("/static/common/images/login-logo.png") no-repeat;
+    background-size: 100% auto;
+    width: 50px;
+    height: 50px;
+    display: block;
+  }
+  .login-head .logo-left img{
+    width: 30%;
+    height: auto;
+    padding-right: 8px;
+    margin-right: 8px;
+    border-right: 1px solid #bdbdbf;
+    display: none;
+  }
+  .login-head .logo-right {
+    display: none;
+  }
+  .logo-content-leftimg {
+    display: none;
+  }
+  .login-content-form {
+    margin: 0 auto;
+    float: none;
+  }
+}

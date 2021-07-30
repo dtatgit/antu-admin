@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.article.mapper.TArticleCatMapper">
+
+    <resultMap id="tArticleCatResult" type="TArticleCat">
+   		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="sort" column="sort" />
+		<result property="parentIds" column="parentIds" />
+		<association property="hasChildren" column="id" select="hasChildren" />
+    </resultMap>
+    
+	<sql id="tArticleCatColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.sort AS "sort",
+		a.parent_id AS "parent.id",
+		a.parent_ids AS "parentIds",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+
+	
+
+	<sql id="tArticleCatJoins">
+		
+	</sql>
+	
+
+    
+	<select id="get" resultType="TArticleCat">
+		SELECT 
+			<include refid="tArticleCatColumns"/>
+		FROM t_article_cat a
+		<include refid="tArticleCatJoins"/>
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="findOneByName" resultType="TArticleCat">
+		SELECT
+		<include refid="tArticleCatColumns"/>
+		FROM t_article_cat a
+		<include refid="tArticleCatJoins"/>
+		WHERE a.name = #{name}
+		order by a.create_date desc
+		limit 1
+	</select>
+	
+	<select id="findList" resultType="TArticleCat">
+		SELECT 
+			<include refid="tArticleCatColumns"/>
+		FROM t_article_cat a
+		<include refid="tArticleCatJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			${dataScope}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				AND a.parent_id = #{parent.id}
+			</if>
+			<if test="parentIds != null and parentIds != ''">
+				AND a.parent_ids LIKE 
+					<if test="dbName == 'oracle'">'%'||#{parentIds}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{parentIds}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{parentIds},'%')</if>
+			</if>
+		</where>
+		ORDER BY a.sort ASC
+	</select>
+	
+	<select id="findAllList" resultType="TArticleCat">
+		SELECT 
+			<include refid="tArticleCatColumns"/>
+		FROM t_article_cat a
+		<include refid="tArticleCatJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			${dataScope}
+		</where>
+		ORDER BY a.sort ASC
+	</select>
+	
+	<select id="getChildren" parameterType="String" resultMap="tArticleCatResult">  
+        select * from t_article_cat where parent_id = #{id} ORDER BY sort 
+    </select> 
+     
+    <select id="hasChildren" parameterType="String" resultType="Boolean">
+        select case when exists(select 1 from t_article_cat where parent_id = #{id}) then 1 else 0 end ${dual}
+    </select>
+    
+	<select id="findByParentIdsLike" resultType="TArticleCat">
+		SELECT
+			a.id,
+			a.parent_id AS "parent.id",
+			a.parent_ids
+		FROM t_article_cat a
+		<include refid="tArticleCatJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.parent_ids LIKE #{parentIds}
+		</where>
+		ORDER BY a.sort ASC
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_article_cat(
+			id,
+			name,
+			sort,
+			parent_id,
+			parent_ids,
+			create_by,
+			create_date,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{sort},
+			#{parent.id},
+			#{parentIds},
+			#{createBy.id},
+			#{createDate},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_article_cat SET 	
+			name = #{name},
+			sort = #{sort},
+			parent_id = #{parent.id},
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateParentIds">
+		UPDATE t_article_cat SET 
+			parent_id = #{parent.id}, 
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM t_article_cat
+		WHERE id = #{id} OR parent_ids LIKE 
+		<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
+		<if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
+        <if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE t_article_cat SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id} OR parent_ids LIKE 
+		<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
+		<if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
+        <if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>
+	</update>
+	
+</mapper>
